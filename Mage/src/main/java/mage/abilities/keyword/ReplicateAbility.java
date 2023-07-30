@@ -167,6 +167,10 @@ class ReplicateTriggeredAbility extends TriggeredAbilityImpl {
             if (!(ability instanceof ReplicateAbility) || !ability.isActivated()) {
                 continue;
             }
+            // Need to make sure this is the parent ability.
+            if (!ability.getSubAbilities().contains(this)) {
+                continue;
+            }
             for (Effect effect : this.getEffects()) {
                 effect.setValue("ReplicateSpell", spell);
                 effect.setValue("ReplicateCount", ((ReplicateAbility) ability).getActivateCount());
