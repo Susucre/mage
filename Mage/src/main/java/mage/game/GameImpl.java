@@ -141,8 +141,8 @@ public abstract class GameImpl implements Game {
     private boolean saveGame = false; // replay code, not done
     private int priorityTime; // Match time limit (per player). Set at the start of the match and only goes down.
     private int bufferTime; // Buffer time before priority time starts going down. Buffer time is refreshed every time the timer starts.
-    private final int startingLife;
-    private final int startingHandSize;
+    private int startingLife;
+    private int startingHandSize;
     private final int minimumDeckSize;
     protected transient PlayerList playerList; // auto-generated from state, don't copy
 
@@ -3683,6 +3683,16 @@ public abstract class GameImpl implements Game {
     @Override
     public void setBufferTime(int bufferTime) {
         this.bufferTime = bufferTime;
+    }
+
+    @Override
+    public void setStartingLife(int startingLife) {
+        this.startingLife = startingLife;
+    }
+
+    @Override
+    public void setStartingHandSize(int startingHandSize) {
+        this.startingHandSize = startingHandSize;
     }
 
     @Override

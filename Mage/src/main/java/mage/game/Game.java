@@ -533,6 +533,10 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
 
     void setBufferTime(int bufferTime);
 
+    void setStartingLife(int startingLife);
+
+    void setStartingHandSize(int startingHandSize);
+
     UUID getStartingPlayerId();
 
     void setStartingPlayerId(UUID startingPlayerId);

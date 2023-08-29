@@ -18,21 +18,29 @@ public class CustomOptionsDialog extends MageDialog {
     public enum SaveLoadKeys {
         TABLE(
                 PreferencesDialog.KEY_NEW_TABLE_NUMBER_OF_FREE_MULLIGANS,
+                PreferencesDialog.KEY_NEW_TABLE_NUMBER_OF_LIFE_AT_START,
+                PreferencesDialog.KEY_NEW_TABLE_NUMBER_OF_HAND_SIZE_AT_START,
                 PreferencesDialog.KEY_NEW_TABLE_MULLIGAN_TYPE,
                 PreferencesDialog.KEY_NEW_TABLE_PLANECHASE
         ),
 
         TOURNEY(
                 PreferencesDialog.KEY_NEW_TOURNAMENT_NUMBER_OF_FREE_MULLIGANS,
+                PreferencesDialog.KEY_NEW_TOURNAMENT_NUMBER_OF_LIFE_AT_START,
+                PreferencesDialog.KEY_NEW_TOURNAMENT_NUMBER_OF_HAND_SIZE_AT_START,
                 PreferencesDialog.KEY_NEW_TOURNAMENT_MULLIGUN_TYPE,
                 PreferencesDialog.KEY_NEW_TOURNAMENT_PLANE_CHASE
         );
         public final String NUMBER_OF_FREE_MULLIGANS;
+        public final String NUMBER_OF_LIFE_AT_START;
+        public final String NUMBER_OF_HAND_SIZE_AT_START;
         public final String MULLIGAN_TYPE;
         public final String PLANECHASE;
 
-        SaveLoadKeys(String numberOfFreeMulligans, String mulliganType, String planechase) {
+        SaveLoadKeys(String numberOfFreeMulligans, String startLife, String startHandSize, String mulliganType, String planechase) {
             NUMBER_OF_FREE_MULLIGANS = numberOfFreeMulligans;
+            NUMBER_OF_LIFE_AT_START = startLife;
+            NUMBER_OF_HAND_SIZE_AT_START = startHandSize;
             MULLIGAN_TYPE = mulliganType;
             PLANECHASE = planechase;
         }
@@ -50,6 +58,12 @@ public class CustomOptionsDialog extends MageDialog {
         this.openButton = openButton;
         initComponents();
         this.spnFreeMulligans.setModel(new SpinnerNumberModel(0, 0, 5, 1));
+        this.chkCustomStartLife.setModel(new DefaultButtonModel());
+        this.spnStartLife.setModel(new SpinnerNumberModel(20, 0, 100, 1));
+        this.spnStartLife.setEnabled(false);;
+        this.chkCustomHandSize.setModel(new DefaultButtonModel());
+        this.spnStartHandSize.setModel(new SpinnerNumberModel(7, 0, 20, 1));
+        this.spnStartHandSize.setEnabled(false);
         cbMulliganType.setModel(new DefaultComboBoxModel(MulliganType.values()));
         this.setModal(true);
     }
@@ -73,6 +87,10 @@ public class CustomOptionsDialog extends MageDialog {
         chkPlaneChase = new javax.swing.JCheckBox();
         jSeparator4 = new javax.swing.JSeparator();
         btnOK = new javax.swing.JButton();
+        chkCustomStartLife = new javax.swing.JCheckBox();
+        chkCustomHandSize = new javax.swing.JCheckBox();
+        spnStartHandSize = new javax.swing.JSpinner();
+        spnStartLife = new javax.swing.JSpinner();
 
         setTitle("Custom Options");
 
@@ -118,32 +136,56 @@ public class CustomOptionsDialog extends MageDialog {
             }
         });
 
+        chkCustomStartLife.setText("Custom Start Life");
+        chkCustomStartLife.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        chkCustomStartLife.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkCustomStartLifeActionPerformed(evt);
+            }
+        });
+
+        chkCustomHandSize.setText("Custom Start Hand Size");
+        chkCustomHandSize.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        chkCustomHandSize.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkCustomHandSizeActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jSeparator2)
-                    .addComponent(jSeparator4)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jSeparator4, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(lblMulliganType)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cbMulliganType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(lblFreeMulligans)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(spnFreeMulligans, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(spnFreeMulligans))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnOK))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(chkPlaneChase)
                             .addComponent(lblGeneralOptions)
-                            .addComponent(lblVariantOptions))
-                        .addGap(0, 125, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnOK)))
+                            .addComponent(lblVariantOptions)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(chkCustomHandSize)
+                                    .addComponent(chkCustomStartLife))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(spnStartHandSize, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(spnStartLife, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -160,6 +202,14 @@ public class CustomOptionsDialog extends MageDialog {
                     .addComponent(spnFreeMulligans, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblFreeMulligans))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(chkCustomStartLife)
+                    .addComponent(spnStartLife, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(chkCustomHandSize)
+                    .addComponent(spnStartHandSize, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblVariantOptions)
@@ -169,7 +219,7 @@ public class CustomOptionsDialog extends MageDialog {
                 .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(btnOK, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         lblMulliganType.getAccessibleContext().setAccessibleName("Mulligan Type:");
@@ -205,6 +255,14 @@ public class CustomOptionsDialog extends MageDialog {
         updateActiveCount();
     }//GEN-LAST:event_chkPlaneChaseActionPerformed
 
+    private void chkCustomHandSizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkCustomHandSizeActionPerformed
+        updateActiveCount();
+    }//GEN-LAST:event_chkCustomHandSizeActionPerformed
+
+    private void chkCustomStartLifeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkCustomStartLifeActionPerformed
+        updateActiveCount();
+    }//GEN-LAST:event_chkCustomStartLifeActionPerformed
+
     public void showDialog() {
         this.setLocation(150, 100);
         this.setVisible(true);
@@ -231,6 +289,13 @@ public class CustomOptionsDialog extends MageDialog {
         this.chkPlaneChase.setSelected(PreferencesDialog.getCachedValue(saveLoadKeys.PLANECHASE + versionStr, "No").equals("Yes"));
         this.spnFreeMulligans.setValue(Integer.parseInt(PreferencesDialog.getCachedValue(saveLoadKeys.NUMBER_OF_FREE_MULLIGANS + versionStr, "0")));
         this.cbMulliganType.setSelectedItem(MulliganType.valueByName(PreferencesDialog.getCachedValue(saveLoadKeys.MULLIGAN_TYPE + versionStr, MulliganType.GAME_DEFAULT.toString())));
+        Integer startLife = Integer.parseInt(PreferencesDialog.getCachedValue(saveLoadKeys.NUMBER_OF_LIFE_AT_START + versionStr, "" + Integer.MIN_VALUE));
+        this.chkCustomStartLife.setSelected(startLife > Integer.MIN_VALUE);
+        this.spnStartLife.setValue(startLife > Integer.MIN_VALUE ? startLife : 20);
+        Integer startHandSize = Integer.parseInt(PreferencesDialog.getCachedValue(saveLoadKeys.NUMBER_OF_HAND_SIZE_AT_START + versionStr, "" + Integer.MIN_VALUE));
+        this.chkCustomHandSize.setSelected(startHandSize >= 0);
+        this.spnStartHandSize.setValue(startHandSize >= 0 ? startHandSize : 7);
+
         updateActiveCount();
     }
 
@@ -249,6 +314,10 @@ public class CustomOptionsDialog extends MageDialog {
         }
         PreferencesDialog.saveValue(saveLoadKeys.NUMBER_OF_FREE_MULLIGANS + versionStr, Integer.toString(options.getFreeMulligans()));
         PreferencesDialog.saveValue(saveLoadKeys.MULLIGAN_TYPE + versionStr, options.getMulliganType().toString());
+        Integer startLife = options.getStartLife();
+        PreferencesDialog.saveValue(saveLoadKeys.NUMBER_OF_LIFE_AT_START + versionStr, startLife == null ? null : Integer.toString(startLife));
+        Integer startHandSize = options.getStartHandSize();
+        PreferencesDialog.saveValue(saveLoadKeys.NUMBER_OF_HAND_SIZE_AT_START + versionStr, startHandSize == null ? null : Integer.toString(startHandSize));
         PreferencesDialog.saveValue(saveLoadKeys.PLANECHASE + versionStr, options.isPlaneChase() ? "Yes" : "No");
     }
 
@@ -257,6 +326,8 @@ public class CustomOptionsDialog extends MageDialog {
      */
     public void writeMatchOptionsTo(MatchOptions options) {
         options.setFreeMulligans((Integer) spnFreeMulligans.getValue());
+        options.setStartLife(chkCustomStartLife.isEnabled() ? (Integer) spnStartLife.getValue() : null);
+        options.setStartHandSize(chkCustomHandSize.isEnabled() ? (Integer) spnStartHandSize.getValue() : null);
         options.setMullgianType((MulliganType) cbMulliganType.getSelectedItem());
         options.setPlaneChase(chkPlaneChase.isSelected());
     }
@@ -264,6 +335,10 @@ public class CustomOptionsDialog extends MageDialog {
     public void updateActiveCount() {
         int activeCount = 0;
         if ((Integer)spnFreeMulligans.getValue() > 0) activeCount++;
+        if (chkCustomStartLife.isEnabled()) activeCount++;
+        spnStartLife.setEnabled(chkCustomStartLife.isEnabled());
+        if (chkCustomHandSize.isEnabled()) activeCount++;
+        spnStartHandSize.setEnabled(chkCustomHandSize.isEnabled());
         if (!cbMulliganType.getSelectedItem().toString().equals(MulliganType.GAME_DEFAULT.toString())) activeCount++;
         if (chkPlaneChase.isSelected()) activeCount++;
         if (activeCount == 0) {
@@ -277,6 +352,8 @@ public class CustomOptionsDialog extends MageDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnOK;
     private javax.swing.JComboBox<String> cbMulliganType;
+    private javax.swing.JCheckBox chkCustomHandSize;
+    private javax.swing.JCheckBox chkCustomStartLife;
     private javax.swing.JCheckBox chkPlaneChase;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator4;
@@ -285,5 +362,7 @@ public class CustomOptionsDialog extends MageDialog {
     private javax.swing.JLabel lblMulliganType;
     private javax.swing.JLabel lblVariantOptions;
     private javax.swing.JSpinner spnFreeMulligans;
+    private javax.swing.JSpinner spnStartHandSize;
+    private javax.swing.JSpinner spnStartLife;
     // End of variables declaration//GEN-END:variables
 }

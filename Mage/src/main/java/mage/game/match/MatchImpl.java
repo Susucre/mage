@@ -216,6 +216,12 @@ public abstract class MatchImpl implements Match {
         }
         game.setPriorityTime(options.getPriorityTime());
         game.setBufferTime(options.getBufferTime());
+        if(options.getStartLife() != null) {
+            game.setStartingLife(options.getStartLife());
+        }
+        if(options.getStartHandSize() != null) {
+            game.setStartingHandSize(options.getStartHandSize());
+        }
     }
 
     protected void shufflePlayers() {
@@ -423,6 +429,12 @@ public abstract class MatchImpl implements Match {
         }
         sb.append("   Mulligan type: ").append(options.getMulliganType().toString()).append("<br/>");
         sb.append("   Free mulligans: ").append(options.getFreeMulligans()).append("<br/>");
+        if(options.getStartLife() != null) {
+            sb.append("   Custom Starting Life: ").append(options.getStartLife()).append("<br/>");
+        }
+        if(options.getStartHandSize() != null) {
+            sb.append("   Custom Starting Hand Size: ").append(options.getStartHandSize()).append("<br/>");
+        }
         if (options.isPlaneChase()) {
             sb.append("   Planechase mode activated").append("<br/>");
         }

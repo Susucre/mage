@@ -29,6 +29,8 @@ public class MatchOptions implements Serializable {
     protected int freeMulligans;
     protected String gameType;
     protected String deckType;
+    protected Integer startLife; // null game mode default
+    protected Integer startHandSize; // null game mode default
     protected boolean limited;
     protected List<PlayerType> playerTypes = new ArrayList<>();
     protected boolean multiPlayer;
@@ -52,13 +54,6 @@ public class MatchOptions implements Serializable {
     protected MatchBufferTime matchBufferTime; // Amount of time each player gets before their normal time limit counts down. Refreshes each time the normal timer is invoked.
     protected MulliganType mulliganType;
 
-    /*public MatchOptions(String name, String gameType) {
-        this.name = name;
-        this.gameType = gameType;
-        this.password = "";
-        this.multiPlayer = false;
-        this.numSeats = 2;
-    }*/
     public MatchOptions(String name, String gameType, boolean multiPlayer, int numSeats) {
         this.name = name;
         this.gameType = gameType;
@@ -117,6 +112,38 @@ public class MatchOptions implements Serializable {
 
     public void setFreeMulligans(int freeMulligans) {
         this.freeMulligans = freeMulligans;
+    }
+
+    /**
+     * if non-null, starting life of each player
+     * if null, use the game mode starting life instead
+     */
+    public Integer getStartLife() {
+        return startLife;
+    }
+
+    /**
+     * Sets the starting life for each player.
+     * @param startLife: null is used for default.
+     */
+    public void setStartLife(Integer startLife) {
+        this.startLife = startLife;
+    }
+
+    /**
+     * if non-null, starting hand size of each player
+     * if null, use the game mode starting life instead
+     */
+    public Integer getStartHandSize() {
+        return startHandSize;
+    }
+
+    /**
+     * Sets the starting hand size for each player.
+     * @param startHandSize: null is used for default.
+     */
+    public void setStartHandSize(Integer startHandSize) {
+        this.startHandSize = startHandSize;
     }
 
     public String getGameType() {

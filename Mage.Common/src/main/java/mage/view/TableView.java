@@ -107,6 +107,14 @@ public class TableView implements Serializable {
                 if (table.getMatch().getFreeMulligans() > 0) {
                     addInfo.append(" FM: ").append(table.getMatch().getFreeMulligans());
                 }
+                Integer startLife = table.getMatch().getOptions().getStartLife();
+                if (startLife != null) {
+                    addInfo.append(" StartLife: ").append(startLife);
+                }
+                Integer startHandSize = table.getMatch().getOptions().getStartHandSize();
+                if (startHandSize != null) {
+                    addInfo.append(" StartHandSize: ").append(startHandSize);
+                }
             } else {
                 addInfo.append("Wins:").append(table.getMatch().getWinsNeeded());
                 addInfo.append(sbScore.toString());
@@ -163,6 +171,14 @@ public class TableView implements Serializable {
                     }
                     if (tourneyMatchOptions.getFreeMulligans() > 0) {
                         infoText.append(" FM: ").append(tourneyMatchOptions.getFreeMulligans());
+                    }
+                    Integer startLife = table.getMatch().getOptions().getStartLife();
+                    if (startLife != null) {
+                        infoText.append(" StartLife: ").append(startLife);
+                    }
+                    Integer startHandSize = table.getMatch().getOptions().getStartHandSize();
+                    if (startHandSize != null) {
+                        infoText.append(" StartHandSize: ").append(startHandSize);
                     }
                     if (table.getTournament().getTournamentType().isLimited()) {
                         infoText.append(" Constr.: ").append(table.getTournament().getOptions().getLimitedOptions().getConstructionTime() / 60).append(" Min.");
