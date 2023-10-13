@@ -22,6 +22,9 @@ public final class Fallout extends ExpansionSet {
 
     private Fallout() {
         super("Fallout", "PIP", ExpansionSet.buildDate(2024, 3, 8), SetType.SUPPLEMENTAL);
+        this.hasBoosters = false;
+        this.hasBasicLands = true;
+        this.expectedMaxCardNumber = 1068;
 
         cards.add(new SetCardInfo("Abundant Growth", 194, Rarity.COMMON, mage.cards.a.AbundantGrowth.class));
         cards.add(new SetCardInfo("Agent Frank Horrigan", 89, Rarity.RARE, mage.cards.a.AgentFrankHorrigan.class));

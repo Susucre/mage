@@ -18,6 +18,7 @@ public final class MurdersAtKarlovManorCommander extends ExpansionSet {
     private MurdersAtKarlovManorCommander() {
         super("Murders at Karlov Manor Commander", "MKC", ExpansionSet.buildDate(2024, 2, 9), SetType.SUPPLEMENTAL);
         this.hasBasicLands = false;
+        this.expectedMaxCardNumber = 358;
 
         cards.add(new SetCardInfo("Academy Manufactor", 221, Rarity.RARE, mage.cards.a.AcademyManufactor.class));
         cards.add(new SetCardInfo("Access Tunnel", 247, Rarity.UNCOMMON, mage.cards.a.AccessTunnel.class));

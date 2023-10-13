@@ -20,6 +20,7 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         this.blockName = "Murders at Karlov Manor"; // for sorting in GUI
         this.hasBasicLands = true;
         this.hasBoosters = false; // temporary
+        this.expectedMaxCardNumber = 433;
 
         cards.add(new SetCardInfo("A Killer Among Us", 167, Rarity.UNCOMMON, mage.cards.a.AKillerAmongUs.class));
         cards.add(new SetCardInfo("Absolving Lammasu", 2, Rarity.UNCOMMON, mage.cards.a.AbsolvingLammasu.class));

@@ -27,6 +27,7 @@ public class RavnicaRemastered extends ExpansionSet {
     private RavnicaRemastered() {
         super("Ravnica Remastered", "RVR", ExpansionSet.buildDate(2024, 1, 12), SetType.SUPPLEMENTAL);
         this.hasBoosters = true;
+        this.expectedMaxCardNumber = 467;
         this.hasBasicLands = false;
         this.maxCardNumberInBooster = 291;
         this.numBoosterCommon = 10; // Retro frame variants not yet implemented for booster generation
@@ -535,7 +536,7 @@ public class RavnicaRemastered extends ExpansionSet {
         int rarityKey = RandomUtil.nextInt(121);
         if (rarityKey <= 11) {
             rarity = Rarity.RARE; // shocklands or chromatic lantern each 1/121
-        } else if (rarityKey <= 11+40) {
+        } else if (rarityKey <= 11 + 40) {
             rarity = Rarity.UNCOMMON; // signets 40/121
         } else {
             rarity = Rarity.COMMON; // guildgates 70/121

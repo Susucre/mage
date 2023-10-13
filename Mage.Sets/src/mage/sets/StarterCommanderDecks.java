@@ -19,6 +19,7 @@ public class StarterCommanderDecks extends ExpansionSet {
         super("Starter Commander Decks", "SCD", ExpansionSet.buildDate(2022, 12, 2), SetType.SUPPLEMENTAL);
         this.hasBoosters = false;
         this.hasBasicLands = true;
+        this.expectedMaxCardNumber = 352;
 
         cards.add(new SetCardInfo("Abrade", 122, Rarity.UNCOMMON, mage.cards.a.Abrade.class));
         cards.add(new SetCardInfo("Absorb", 216, Rarity.RARE, mage.cards.a.Absorb.class));

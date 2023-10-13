@@ -36,6 +36,7 @@ public final class TheLostCavernsOfIxalan extends ExpansionSet {
         this.ratioBoosterSpecialLandNumerator = 7;
         this.numBoosterDoubleFaced = 1; // explicit slot for 5 common + 12 uncommon DFCs
         this.maxCardNumberInBooster = 291;
+        this.expectedMaxCardNumber = 410;
 
         cards.add(new SetCardInfo("Abrade", 131, Rarity.COMMON, mage.cards.a.Abrade.class));
         cards.add(new SetCardInfo("Abuelo's Awakening", 1, Rarity.RARE, mage.cards.a.AbuelosAwakening.class, NON_FULL_USE_VARIOUS));

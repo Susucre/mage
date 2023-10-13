@@ -19,6 +19,7 @@ public final class RavnicaClueEdition extends ExpansionSet {
         super("Ravnica: Clue Edition", "CLU", ExpansionSet.buildDate(2024, 2, 9), SetType.EXPANSION);
         this.hasBasicLands = true;
         this.hasBoosters = false;
+        this.expectedMaxCardNumber = 284;
 
         cards.add(new SetCardInfo("Aegis of the Legion", 22, Rarity.RARE, mage.cards.a.AegisOfTheLegion.class));
         cards.add(new SetCardInfo("Affectionate Indrik", 155, Rarity.UNCOMMON, mage.cards.a.AffectionateIndrik.class));
