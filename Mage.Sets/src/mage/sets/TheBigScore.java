@@ -20,6 +20,7 @@ public final class TheBigScore extends ExpansionSet {
         this.blockName = "Outlaws of Thunder Junction";
         this.hasBasicLands = false;
         this.hasBoosters = false;
+        this.expectedMaxCardNumber = 95;
 
         cards.add(new SetCardInfo("Ancient Cornucopia", 16, Rarity.MYTHIC, mage.cards.a.AncientCornucopia.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ancient Cornucopia", 46, Rarity.MYTHIC, mage.cards.a.AncientCornucopia.class, NON_FULL_USE_VARIOUS));

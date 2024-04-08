@@ -2490,16 +2490,6 @@ public class VerifyCardDataTest {
                 )
         );
 
-        // LCI: variants. Clean when those have been added.
-        /*intentionalUnimplemented.put(
-                "LCI", new HashSet<>(Stream
-                        .iterate(1, n -> n + 1)
-                        .limit(415)
-                        .filter(i -> i == 56 || (i >= 292 && i != 363 && i != 393 && i != 395 && i != 397 && i != 399 && i != 401))
-                        .collect(Collectors.toList())
-                )
-        );*/
-
         // LCC: reprints & variants. Clean when those have been added.
         intentionalUnimplemented.put(
                 "LCC", new HashSet<>(Stream

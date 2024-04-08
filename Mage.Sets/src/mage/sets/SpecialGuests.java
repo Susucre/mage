@@ -20,7 +20,7 @@ public final class SpecialGuests extends ExpansionSet {
         super("Special Guests", "SPG", ExpansionSet.buildDate(2023, 11, 17), SetType.SUPPLEMENTAL);
         this.hasBoosters = false;
         this.hasBasicLands = false;
-        this.expectedMaxCardNumber = 28;
+        this.expectedMaxCardNumber = 49;
 
         cards.add(new SetCardInfo("Brazen Borrower", 30, Rarity.MYTHIC, mage.cards.b.BrazenBorrower.class));
         cards.add(new SetCardInfo("Breeches, Brazen Plunderer", 6, Rarity.UNCOMMON, mage.cards.b.BreechesBrazenPlunderer.class));

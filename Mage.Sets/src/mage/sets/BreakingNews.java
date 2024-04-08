@@ -20,6 +20,7 @@ public final class BreakingNews extends ExpansionSet {
         this.hasBoosters = false;
         this.hasBasicLands = false;
         this.maxCardNumberInBooster = 65;
+        this.expectedMaxCardNumber = 80;
 
         cards.add(new SetCardInfo("Abrupt Decay", 34, Rarity.RARE, mage.cards.a.AbruptDecay.class));
         cards.add(new SetCardInfo("Anguished Unmaking", 35, Rarity.MYTHIC, mage.cards.a.AnguishedUnmaking.class, NON_FULL_USE_VARIOUS));

@@ -18,6 +18,7 @@ public final class OutlawsOfThunderJunctionCommander extends ExpansionSet {
     private OutlawsOfThunderJunctionCommander() {
         super("Outlaws of Thunder Junction Commander", "OTC", ExpansionSet.buildDate(2024, 4, 19), SetType.SUPPLEMENTAL);
         this.hasBasicLands = false;
+        expectedMaxCardNumber = 342;
 
         cards.add(new SetCardInfo("Academy Manufactor", 251, Rarity.RARE, mage.cards.a.AcademyManufactor.class));
         cards.add(new SetCardInfo("Access Tunnel", 270, Rarity.UNCOMMON, mage.cards.a.AccessTunnel.class));
