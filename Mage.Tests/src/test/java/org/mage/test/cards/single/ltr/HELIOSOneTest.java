@@ -4,7 +4,6 @@ import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -22,7 +21,6 @@ public class HELIOSOneTest extends CardTestPlayerBase {
      */
     private static final String helios = "HELIOS One";
 
-    @Ignore // needs fix
     @Test
     public void test_Target_0MV_0Energy() {
         setStrictChooseMode(true);
@@ -43,7 +41,6 @@ public class HELIOSOneTest extends CardTestPlayerBase {
         assertCounterCount(playerA, CounterType.ENERGY, 0);
     }
 
-    @Ignore // needs fix
     @Test
     public void test_NoTarget_1MV_0Energy() {
         setStrictChooseMode(true);
@@ -66,7 +63,6 @@ public class HELIOSOneTest extends CardTestPlayerBase {
         }
     }
 
-    @Ignore // needs fix
     @Test
     public void test_Target_1MV_1Energy() {
         setStrictChooseMode(true);
@@ -95,7 +91,6 @@ public class HELIOSOneTest extends CardTestPlayerBase {
         assertCounterCount(playerA, CounterType.ENERGY, 0);
     }
 
-    @Ignore // needs fix
     @Test
     public void test_Target_0MV_1Energy() {
         setStrictChooseMode(true);

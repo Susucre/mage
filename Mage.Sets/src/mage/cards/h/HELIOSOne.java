@@ -12,15 +12,17 @@ import mage.abilities.costs.common.PayEnergyCost;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.dynamicvalue.common.SourceControllerCountersCount;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.counter.GetEnergyCountersControllerEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.ComparisonType;
 import mage.game.Game;
 import mage.target.common.TargetNonlandPermanent;
-import mage.target.targetadjustment.XManaValueTargetAdjuster;
+import mage.target.targetadjustment.ManaValueTargetAdjuster;
 
 import java.util.UUID;
 
@@ -52,7 +54,7 @@ public final class HELIOSOne extends CardImpl {
         ability.addCost(new PayEnergyCost(0).setText("Pay X {E}")); // TODO: replace with proper VariableEnergyCost
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetNonlandPermanent());
-        ability.setTargetAdjuster(new XManaValueTargetAdjuster());
+        ability.setTargetAdjuster(new ManaValueTargetAdjuster(SourceControllerCountersCount.ENERGY, ComparisonType.OR_LESS));
         ability.setCostAdjuster(HELIOSOneCostAdjuster.instance); // TODO: remove
         this.addAbility(ability);
     }

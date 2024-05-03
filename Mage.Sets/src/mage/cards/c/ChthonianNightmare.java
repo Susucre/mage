@@ -11,15 +11,17 @@ import mage.abilities.costs.CostsImpl;
 import mage.abilities.costs.common.PayEnergyCost;
 import mage.abilities.costs.common.ReturnToHandFromBattlefieldSourceCost;
 import mage.abilities.costs.common.SacrificeTargetCost;
+import mage.abilities.dynamicvalue.common.SourceControllerCountersCount;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.effects.common.counter.GetEnergyCountersControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.ComparisonType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.targetadjustment.XManaValueTargetAdjuster;
+import mage.target.targetadjustment.ManaValueTargetAdjuster;
 
 import java.util.UUID;
 
@@ -43,7 +45,7 @@ public final class ChthonianNightmare extends CardImpl {
         ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE));
         ability.addCost(new ReturnToHandFromBattlefieldSourceCost());
-        ability.setTargetAdjuster(new XManaValueTargetAdjuster());
+        ability.setTargetAdjuster(new ManaValueTargetAdjuster(SourceControllerCountersCount.ENERGY, ComparisonType.OR_LESS));
         ability.setCostAdjuster(ChthonianNightmareCostAdjuster.instance); // TODO: remove
         this.addAbility(ability);
     }
