@@ -26,6 +26,7 @@ public final class ModernHorizons3CommanderLeaks extends ExpansionSet {
         this.hasBasicLands = false;
         this.hasBoosters = false;
 
+        cards.add(new SetCardInfo("Barrowgoyf", "80X", Rarity.RARE, mage.cards.b.Barrowgoyf.class));
         cards.add(new SetCardInfo("Pyrogoyf", 111, Rarity.RARE, mage.cards.p.Pyrogoyf.class));
     }
 }
