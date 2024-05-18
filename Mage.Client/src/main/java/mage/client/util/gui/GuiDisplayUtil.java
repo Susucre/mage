@@ -406,7 +406,7 @@ public final class GuiDisplayUtil {
 
         // missing image info in card popup
         boolean displayFullImagePath = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SHOW_FULL_IMAGE_PATH, "false").equals("true");
-        if (displayFullImagePath) {
+        if (false && displayFullImagePath) {
             String imageFile = CardImageUtils.buildImagePathToCardView(card);
             if (imageFile.startsWith("ERROR") || !(new TFile(imageFile).exists())) {
                 buffer.append("<p style='margin: 2px'><b>Missing image:</b> ").append(imageFile).append("</p>");
