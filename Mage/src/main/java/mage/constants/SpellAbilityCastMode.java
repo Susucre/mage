@@ -23,7 +23,8 @@ public enum SpellAbilityCastMode {
     DISTURB("Disturb", true),
     MORE_THAN_MEETS_THE_EYE("More than Meets the Eye", true),
     PLOT("Plot"),
-    FORETELL("Foretell");
+    FORETELL("Foretell"),
+    MUTATE("Mutate");
 
     private final String text;
 
