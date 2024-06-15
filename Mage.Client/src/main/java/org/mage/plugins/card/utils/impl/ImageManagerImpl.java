@@ -180,6 +180,15 @@ public enum ImageManagerImpl implements ImageManager {
     }
 
     @Override
+    public BufferedImage getMutateImage() {
+        if (imageMutate == null) {
+            Image image = getImageFromResourceTransparent("/card/mutate.png", Color.WHITE, new Rectangle(20, 20));
+            imageMutate = BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB);
+        }
+        return imageMutate;
+    }
+
+    @Override
     public BufferedImage getTokenIconImage() {
         if (imageTokenIcon == null) {
             Image image = getImageFromResourceTransparent("/card/token.png", Color.WHITE, new Rectangle(20, 20));
