@@ -1498,5 +1498,6 @@ public class ContinuousEffects implements Serializable {
                 }
             }
         }
+        game.applyEffects(); // required to get abilities correct before firing mutated event (e.g. lose abilities)
     }
 }
