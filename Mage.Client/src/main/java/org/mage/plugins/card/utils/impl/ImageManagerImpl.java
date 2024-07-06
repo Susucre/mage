@@ -15,9 +15,7 @@ import java.awt.*;
 import java.awt.image.*;
 import java.io.InputStream;
 import java.net.URL;
-import java.util.HashMap;
 import java.util.Locale;
-import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -37,6 +35,7 @@ public enum ImageManagerImpl implements ImageManager {
     private static BufferedImage imageSickness;
     private static BufferedImage imageDay;
     private static BufferedImage imageNight;
+    private static BufferedImage imageMutate;
 
     private static BufferedImage imageTokenIcon;
     private static BufferedImage triggeredAbilityIcon;
@@ -61,6 +60,7 @@ public enum ImageManagerImpl implements ImageManager {
 
     private static final SoftValuesLoadingCache<Key, BufferedImage> THEME_BUTTON_IMAGES_CACHE;
     private static final SoftValuesLoadingCache<Key, Image> PHASE_THEME_BUTTON_IMAGES_CACHE;
+
     static {
         THEME_BUTTON_IMAGES_CACHE = ImageCaches.register(SoftValuesLoadingCache.from(ImageManagerImpl::createThemeButtonImage));
         PHASE_THEME_BUTTON_IMAGES_CACHE = ImageCaches.register(SoftValuesLoadingCache.from(ImageManagerImpl::createPhaseThemeButtonImage));
