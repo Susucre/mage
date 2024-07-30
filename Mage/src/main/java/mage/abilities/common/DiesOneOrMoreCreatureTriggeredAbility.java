@@ -21,6 +21,10 @@ public class DiesOneOrMoreCreatureTriggeredAbility extends TriggeredAbilityImpl 
 
     private final FilterCreaturePermanent filter;
 
+    public DiesOneOrMoreCreatureTriggeredAbility(Effect effect, FilterCreaturePermanent filter) {
+        this(effect, filter, false);
+    }
+
     public DiesOneOrMoreCreatureTriggeredAbility(Effect effect, FilterCreaturePermanent filter, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
         this.filter = filter;
