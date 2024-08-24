@@ -3,15 +3,18 @@ package mage.abilities.effects.common;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.keyword.MutateAbility;
 import mage.cards.Card;
 import mage.constants.Outcome;
 import mage.constants.PutCards;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTargets;
 import mage.util.CardUtil;
 
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -62,7 +65,7 @@ public class ExileThenReturnTargetEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        Set<Card> toFlicker = getTargetPointer().getTargets(game, source)
+        Set<Permanent> toFlicker = getTargetPointer().getTargets(game, source)
                 .stream()
                 .map(game::getPermanent)
                 .filter(Objects::nonNull)
@@ -72,13 +75,13 @@ public class ExileThenReturnTargetEffect extends OneShotEffect {
         }
         controller.moveCards(toFlicker, Zone.EXILED, source, game);
         game.processAction();
-        for (Card card : toFlicker) {
+        for (Card card : MutateAbility.getAllCardsFromPermanentsLeftBattlefield(toFlicker)) {
             putCards.moveCard(
                     yourControl ? controller : game.getPlayer(card.getOwnerId()),
                     card.getMainCard(), source, game, "card");
         }
         if (afterEffect != null) {
-            afterEffect.setTargetPointer(new FixedTargets(toFlicker, game));
+            afterEffect.setTargetPointer(new FixedTargets(new ArrayList<>(toFlicker), game));
             afterEffect.apply(game, source);
         }
         return true;

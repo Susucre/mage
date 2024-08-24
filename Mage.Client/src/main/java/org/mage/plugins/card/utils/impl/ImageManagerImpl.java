@@ -30,35 +30,6 @@ public enum ImageManagerImpl implements ImageManager {
 
     private static final Logger logger = Logger.getLogger(ImageManagerImpl.class);
 
-    private static BufferedImage appImage;
-    private static BufferedImage appSmallImage;
-    private static BufferedImage appImageFlashed;
-
-    private static BufferedImage imageSickness;
-    private static BufferedImage imageDay;
-    private static BufferedImage imageNight;
-
-    private static BufferedImage imageTokenIcon;
-    private static BufferedImage triggeredAbilityIcon;
-    private static BufferedImage activatedAbilityIcon;
-    private static BufferedImage lookedAtIcon;
-    private static BufferedImage revealedIcon;
-    private static BufferedImage exileIcon;
-    private static BufferedImage imageCopyIcon;
-    private static BufferedImage imageCounterGreen;
-    private static BufferedImage imageCounterGrey;
-    private static BufferedImage imageCounterRed;
-    private static BufferedImage imageCounterViolet;
-
-    private static BufferedImage imageDlgAcceptButton;
-    private static BufferedImage imageDlgActiveAcceptButton;
-    private static BufferedImage imageDlgCancelButton;
-    private static BufferedImage imageDlgActiveCancelButton;
-    private static BufferedImage imageDlgPrevButton;
-    private static BufferedImage imageDlgActivePrevButton;
-    private static BufferedImage imageDlgNextButton;
-    private static BufferedImage imageDlgActiveNextButton;
-
     private static final SoftValuesLoadingCache<Key, BufferedImage> THEME_BUTTON_IMAGES_CACHE;
     private static final SoftValuesLoadingCache<Key, Image> PHASE_THEME_BUTTON_IMAGES_CACHE;
 
@@ -193,6 +164,15 @@ public enum ImageManagerImpl implements ImageManager {
             imageNight = BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB);
         }
         return imageNight;
+    }
+
+    @Override
+    public BufferedImage getMutateImage() {
+        if (imageMutate == null) {
+            Image image = getImageFromResourceTransparent("/card/mutate.png", Color.WHITE, new Rectangle(20, 20));
+            imageMutate = BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB);
+        }
+        return imageMutate;
     }
 
     @Override
@@ -494,4 +474,48 @@ public enum ImageManagerImpl implements ImageManager {
         WritableRaster raster = bi.copyData(null);
         return new BufferedImage(cm, raster, isAlphaPremultiplied, null);
     }
+
+    private static BufferedImage appImage;
+    private static BufferedImage appSmallImage;
+    private static BufferedImage appImageFlashed;
+
+    private static BufferedImage imageSickness;
+    private static BufferedImage imageDay;
+    private static BufferedImage imageNight;
+    private static BufferedImage imageMutate;
+
+    private static BufferedImage imageTokenIcon;
+    private static BufferedImage triggeredAbilityIcon;
+    private static BufferedImage activatedAbilityIcon;
+    private static BufferedImage lookedAtIcon;
+    private static BufferedImage revealedIcon;
+    private static BufferedImage exileIcon;
+    private static BufferedImage imageCopyIcon;
+    private static BufferedImage imageCounterGreen;
+    private static BufferedImage imageCounterGrey;
+    private static BufferedImage imageCounterRed;
+    private static BufferedImage imageCounterViolet;
+
+    private static BufferedImage imageDlgAcceptButton;
+    private static BufferedImage imageDlgActiveAcceptButton;
+    private static BufferedImage imageDlgCancelButton;
+    private static BufferedImage imageDlgActiveCancelButton;
+    private static BufferedImage imageDlgPrevButton;
+    private static BufferedImage imageDlgActivePrevButton;
+    private static BufferedImage imageDlgNextButton;
+    private static BufferedImage imageDlgActiveNextButton;
+
+    private static BufferedImage imageCancelSkipButton;
+    private static BufferedImage imageSwitchHandsButton;
+    private static BufferedImage imageStopWatchingButton;
+    private static BufferedImage imageConcedeButton;
+    private static BufferedImage imageSkipNextTurnButton;
+    private static BufferedImage imageSkipToEndTurnButton;
+    private static BufferedImage imageSkipToMainButton;
+    private static BufferedImage imageSkipStackButton;
+    private static BufferedImage imageSkipUntilEndStepBeforeYourTurnButton;
+    private static BufferedImage imageSkipYourNextTurnButton;
+    private static BufferedImage imageToggleRecordMacroButton;
+
+    private static Map<String, Image> phasesImages;
 }

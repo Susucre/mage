@@ -784,4 +784,6 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
     boolean isGameStopped();
 
     boolean isTurnOrderReversed();
+
+    boolean mutatePermanent(Card card, UUID permanentId, Spell source);
 }
