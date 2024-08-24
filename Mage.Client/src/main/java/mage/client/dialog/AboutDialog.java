@@ -81,14 +81,7 @@ public class AboutDialog extends MageDialog {
         lblVersion.setText("0.0.0");
 
         jLabel2.setText("Courtesy: BetaSteward@googlemail.com. Site: http://xmage.de/");
-
-        btnWhatsNew.setText("What's new");
-        btnWhatsNew.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnWhatsNewActionPerformed(evt);
-            }
-        });
-
+        
         scrollDevs.setBorder(null);
 
         panelDevs.setEditable(false);
@@ -145,10 +138,6 @@ public class AboutDialog extends MageDialog {
     private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
         onCancel();
     }//GEN-LAST:event_btnOkActionPerformed
-
-    private void btnWhatsNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnWhatsNewActionPerformed
-        MageFrame.getInstance().showWhatsNewDialog(true);
-    }//GEN-LAST:event_btnWhatsNewActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnOk;
