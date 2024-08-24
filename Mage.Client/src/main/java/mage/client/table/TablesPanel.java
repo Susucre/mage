@@ -7,6 +7,7 @@ import mage.client.SessionHandler;
 import mage.client.chat.ChatPanelBasic;
 import mage.client.components.MageComponents;
 import mage.client.dialog.*;
+import static mage.client.dialog.PreferencesDialog.*;
 import mage.client.util.GUISizeHelper;
 import mage.client.util.IgnoreList;
 import mage.client.util.MageTableRowSorter;
@@ -54,8 +55,6 @@ import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
-import static mage.client.dialog.PreferencesDialog.*;
-
 /**
  * GUI: lobby's main component
  *
@@ -76,24 +75,24 @@ public class TablesPanel extends javax.swing.JPanel {
     public static final double REFRESH_TIMEOUTS_INCREASE_FACTOR = 0.8; // can increase timeouts by 80% (0.8)
 
     private final TablesTableModel tableModel;
-    
+
     private static final TableInfo tableInfo = new TableInfo() // currently only the hint texts are used from this object
-            .addColumn(0, 35, Icon.class, "M/T", 
+            .addColumn(0, 35, Icon.class, "M/T",
                     "<b>Basic table type</b><br>"
                             + "A symbol for match or a tournament table")
             .addColumn(1, 150, String.class, "Deck Type", null)
-            .addColumn(2, 100, String.class, "Name", 
+            .addColumn(2, 100, String.class, "Name",
                     "<b>Table name</b><br>"
                             + "A name for the table the table creator has set")
-            .addColumn(3, 50, String.class, "Seats", 
+            .addColumn(3, 50, String.class, "Seats",
                     "<b>Seats of the table</b>"
                             + "<br>Occupied Seats / Total number of seats ")
             .addColumn(4, 120, String.class, "Owner / Players",
                     "<b>Joined players</b><br>"
                             + "Owner = First name is the creator of the table<br>"
                             + "Players = Names of the other players joint to the table")
-            
-            .addColumn(5, 180, String.class, "Game Type",null)
+
+            .addColumn(5, 180, String.class, "Game Type", null)
             .addColumn(6, 80, String.class, "Info",
                     "<b>Match / Tournament settings</b>"
                             + "<br>Wins = Number of games you need to wins to win a match"
@@ -108,35 +107,35 @@ public class TablesPanel extends javax.swing.JPanel {
                     "<b>Table status</b><br>"
                             + "Information about the progress of the match or tournament")
             .addColumn(8, 80, String.class, "Password",
-                    "<b>Password set</b><br>" 
+                    "<b>Password set</b><br>"
                             + "Yes = You need the password of this table<br>"
                             + "to join the table")
-            .addColumn(9, 60, Date.class, "Created / Started", 
+            .addColumn(9, 60, Date.class, "Created / Started",
                     "<b>Creation and starting time</b><br>"
                             + "When was the table created<br>"
                             + "when started the match or tournament")
-            .addColumn(10, 40, SkillLevel.class, "Skill Level", 
+            .addColumn(10, 40, SkillLevel.class, "Skill Level",
                     "<b>Defined skill level</b><br>"
                             + "Expectations of the table creator<br>"
                             + "on the level of experience of the joining players")
-            .addColumn(11, 40, String.class, "Rated", 
+            .addColumn(11, 40, String.class, "Rated",
                     "<b>Rating status</b><br>"
                             + "Yes = The matches of this table are rated")
-            .addColumn(12, 60, String.class, "Quit %", 
+            .addColumn(12, 60, String.class, "Quit %",
                     "<b>Needed maximal quit ratio</b><br>"
                             + "Your calculated quit ratio of your past games"
                             + "<br>needs to be below or equal to the given value"
                             + "<br>to be able to join to the table")
-            .addColumn(13, 40, String.class, "Min Rating", 
+            .addColumn(13, 40, String.class, "Min Rating",
                     "<b>Rating restriction</b><br>"
                             + "You need at least this rating"
                             + "<br> to be able to join the table")
-            .addColumn(14, 80, String.class, "Action", 
+            .addColumn(14, 80, String.class, "Action",
                     "<b>Actions related to this table</b><br>"
                             + "Depending on the state of the table<br>"
                             + "the possible actions you can take<br>"
                             + "are shown here as buttons");
-    
+
     private final MatchesTableModel matchesModel;
     private UUID roomId;
     private UpdateTablesTask updateTablesTask;
@@ -285,7 +284,7 @@ public class TablesPanel extends javax.swing.JPanel {
      */
     public TablesPanel() {
 
-        tableModel = new TablesTableModel();        
+        tableModel = new TablesTableModel();
         matchesModel = new MatchesTableModel();
         gameChooser = new GameChooser();
 
@@ -297,8 +296,8 @@ public class TablesPanel extends javax.swing.JPanel {
 
         // 1. TABLE CURRENT
         tableTables.createDefaultColumnsFromModel();
-        ((MageTable)tableTables).setTableInfo(tableInfo);
-        
+        ((MageTable) tableTables).setTableInfo(tableInfo);
+
         activeTablesSorter = new MageTableRowSorter(tableModel) {
             @Override
             public void toggleSortOrder(int column) {
@@ -718,7 +717,9 @@ public class TablesPanel extends javax.swing.JPanel {
         if (SessionHandler.getSession() != null) {
             // active tables and server messages
             if (updateTablesTask == null || updateTablesTask.isDone() || refreshImmediately) {
-                if (updateTablesTask != null) updateTablesTask.cancel(true);
+                if (updateTablesTask != null) {
+                    updateTablesTask.cancel(true);
+                }
                 updateTablesTask = new UpdateTablesTask(roomId, this);
                 updateTablesTask.execute();
             }
@@ -726,17 +727,23 @@ public class TablesPanel extends javax.swing.JPanel {
             // finished tables
             if (this.btnStateFinished.isSelected()) {
                 if (updateMatchesTask == null || updateMatchesTask.isDone() || refreshImmediately) {
-                    if (updateMatchesTask != null) updateMatchesTask.cancel(true);
+                    if (updateMatchesTask != null) {
+                        updateMatchesTask.cancel(true);
+                    }
                     updateMatchesTask = new UpdateMatchesTask(roomId, this);
                     updateMatchesTask.execute();
                 }
             } else {
-                if (updateMatchesTask != null) updateMatchesTask.cancel(true);
+                if (updateMatchesTask != null) {
+                    updateMatchesTask.cancel(true);
+                }
             }
 
             // players list
             if (updatePlayersTask == null || updatePlayersTask.isDone() || refreshImmediately) {
-                if (updatePlayersTask != null) updatePlayersTask.cancel(true);
+                if (updatePlayersTask != null) {
+                    updatePlayersTask.cancel(true);
+                }
                 updatePlayersTask = new UpdatePlayersTask(roomId, this.chatPanelMain);
                 updatePlayersTask.execute();
             }
@@ -823,7 +830,8 @@ public class TablesPanel extends javax.swing.JPanel {
             }
         }
         stopTasks();
-        this.chatPanelMain.cleanUp();;
+        this.chatPanelMain.cleanUp();
+        ;
 
         Component c = this.getParent();
         while (c != null && !(c instanceof TablesPane)) {
@@ -1634,17 +1642,6 @@ public class TablesPanel extends javax.swing.JPanel {
         jPanelBottom.setPreferredSize(new java.awt.Dimension(516, 37));
         jPanelBottom.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
-        buttonWhatsNew.setText("Show what's new");
-        buttonWhatsNew.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        buttonWhatsNew.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        buttonWhatsNew.setOpaque(false);
-        buttonWhatsNew.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonWhatsNewActionPerformed(evt);
-            }
-        });
-        jPanelBottom.add(buttonWhatsNew);
-
         buttonNextMessage.setText("Next message");
         buttonNextMessage.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         buttonNextMessage.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -1700,7 +1697,7 @@ public class TablesPanel extends javax.swing.JPanel {
             MatchOptions options = new MatchOptions(gameName, gameType, multiPlayer, numSeats);
             options.getPlayerTypes().add(PlayerType.HUMAN);
             options.getPlayerTypes().add(aiType);
-            for (int i=2 ; i < numSeats ; i++) {
+            for (int i = 2; i < numSeats; i++) {
                 options.getPlayerTypes().add(aiType);
             }
             options.setDeckType("Variant Magic - Freeform Commander");
@@ -1720,7 +1717,7 @@ public class TablesPanel extends javax.swing.JPanel {
 
             SessionHandler.joinTable(roomId, table.getTableId(), "Human", PlayerType.HUMAN, 1, testDeck, "");
             SessionHandler.joinTable(roomId, table.getTableId(), "Computer", aiType, 1, testDeck, "");
-            for (int i=2 ; i < numSeats ; i++) {
+            for (int i = 2; i < numSeats; i++) {
                 SessionHandler.joinTable(roomId, table.getTableId(), "Computer" + i, aiType, 1, testDeck, "");
             }
             SessionHandler.startMatch(roomId, table.getTableId());
@@ -1759,10 +1756,6 @@ public class TablesPanel extends javax.swing.JPanel {
         }
         this.startUpdateTasks(true);
     }//GEN-LAST:event_btnStateFinishedActionPerformed
-
-    private void buttonWhatsNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonWhatsNewActionPerformed
-        MageFrame.getInstance().showWhatsNewDialog(true);
-    }//GEN-LAST:event_buttonWhatsNewActionPerformed
 
     private void btnQuickStart2PlayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuickStartDuelActionPerformed
         createTestGame("Test 2 player", "Commander Free For All", false);
